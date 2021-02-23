@@ -7,7 +7,7 @@ function App()
 const [todos,setTodos]=useState([]);
  let todo="";
 
-
+const[id,setId]=useState(0);
  const updatetodo=e=>{
 	 todo=e.target.value;
  }
@@ -16,7 +16,10 @@ const [todos,setTodos]=useState([]);
 function task(newTodo){
 	if(newTodo!==""){
     const todoObj={
-		id:10,
+		id:(()=>{
+			let a=id;
+			a++;
+			setId(a)}),
 		value:newTodo,
 		isEditing:false
 	}
@@ -26,9 +29,17 @@ function task(newTodo){
 	}
 }
 
+const delete_todo=(todo_id)=>{
+	let filtered_arr=todos.filter(todo=>todo.id!==todo_id);
+	setTodos(filtered_arr);
+}
+
+const del=()=>{
+	delete_todo(todo.id);
+}
 
 const items=todos.map(function(todo){
-	return <li className="list">{todo.value}</li>
+	return <li  className="list">{todo.value} (<a href="#">Edit</a> | <a href="#" onClick={()=>{delete_todo(todo.id)}}>Delete</a>)</li>
 })
 
 
