@@ -1,13 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import "./../styles/App.css";
+import "bootstrap/dist/css/bootstrap.css"
 
 function App() 
 {
+const [todos,setTodos]=useState([]);
+ let todo="";
+
+
+ const updatetodo=e=>{
+	 todo=e.target.value;
+ }
+
+
+function task(newTodo){
+	if(newTodo!==""){
+    const todoObj={
+		id:10,
+		value:newTodo,
+		isEditing:false
+	}
+	const upTodos=[...todos,todoObj];
+	setTodos(upTodos);
+	console.log(todos);
+	}
+}
+
+
+const items=todos.map(function(todo){
+	return <li className="list">{todo.value}</li>
+})
+
+
 	return (
-	<div id="main">
-	//Do not alter main div
-	//Please do not alter the functional component as tests depend on the type of component.
+	<div id="main" className="text-center">
+	<h1>Todo List</h1>
+	<textarea id="task" style={{maxWidth:300}} onChange={updatetodo}></textarea><br/>
+	<button id="btn"  onClick={()=>{task(todo)}}>Add</button>
+	<div className="text-center">
+		<ul>
+			{items}
+		</ul>
 	</div>
+	</div>
+	
 	);
 }
 
