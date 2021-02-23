@@ -68,8 +68,8 @@ const items=todos.map(function(todo){
 	return <li  className="list">
 	{todo.isEditing?(
 		<>
-		<textarea onChange={change}  defaultValue={todosValue}></textarea>
-		<button onClick={finsihEditing}>Update Todo</button>
+		<textarea className="editTask" onChange={change}  defaultValue={todosValue}></textarea>
+		<button className="saveTask" onClick={finsihEditing}>Update Todo</button>
 		</>
 	):(
 		<>
